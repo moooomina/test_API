@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>popup</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <style>
+        body, html {background:lightcyan}
+        #notice_wrap {
+            width:400px; height:600px; border:1px solid #222;
+            background:#fff; padding:20px;
+            position:fixed; left:50%; transform:translateX(-50%);
+            display:flex; flex-flow:column nowrap;
+            justify-content:space-between; border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="notice_wrap">
+        <p class="closeWrap">
+            <input type="checkbox" name="chk" id="chk">
+            <label for="expiresChk">3일동안 이 창 열지 않기</label>
+            <button type="button" class="closeBtn">닫기</button>
+        </p>
+    </div>
+    <script>
+        $('.closeBtn').on('click',function(){
+            if($('#chk').is(':checked')){
+                console.log('checked true')
+                $.cookie('popup','none',{expires:3,path:'/'})
+                $('#notice_wrap').fadeOut('fast')
+            }
+        })
+
+        if($.cookie('popup')=='none'){
+            $('#notice_wrap').hide()
+        }
+    </script>
+</body>
+</html>
